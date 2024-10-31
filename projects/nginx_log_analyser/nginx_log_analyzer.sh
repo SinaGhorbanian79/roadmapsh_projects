@@ -34,3 +34,13 @@ done
 
 printf '%*s\n' "$terminal_width" '' | tr ' ' '#'
 
+echo "Top 5 user agents:"
+for((i=1; i<6; i++)); do
+	user_agent_content=$(echo "$content" | awk -F'"' '{print $6}' | sort | uniq -c | sort -nr | head -n $i | tail -n 1)
+	user_agent=$(echo "$user_agent_content" |  awk '{$1=""; print $0}' | sed 's/^ *//')
+	user_agent_count=$(echo "$user_agent_content" | awk '{print $1}')
+	echo -e "$i---- \"$user_agent\" ---- Count: \"$user_agent_count\""
+done
+
+printf '%*s\n' "$terminal_width" '' | tr ' ' '#'
+

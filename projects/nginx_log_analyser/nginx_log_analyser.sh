@@ -1,6 +1,19 @@
 #!/bin/bash
 terminal_width=$(tput cols)
-content="$(cat nginx-access.log)"
+
+if [ -z "$1" ]; then
+	echo "Please Provide nginx access log full path"
+	exit 1
+else
+	nginx_access_log_path=$1
+fi
+echo $1
+if [ ! -f "$nginx_access_log_path" ]; then
+    echo "path not valid"
+    exit 1
+fi
+
+content="$(cat $nginx_access_log_path)"
 
 printf '%*s\n' "$terminal_width" '' | tr ' ' '#'
 

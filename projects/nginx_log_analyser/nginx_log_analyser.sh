@@ -7,7 +7,6 @@ if [ -z "$1" ]; then
 else
 	nginx_access_log_path=$1
 fi
-echo $1
 if [ ! -f "$nginx_access_log_path" ]; then
     echo "path not valid"
     exit 1

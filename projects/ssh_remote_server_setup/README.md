@@ -6,7 +6,7 @@ You can select any provider like DigitalOcean, AWS, or others.
 
 ### Access the Server:
 
-After the server is created, you will receive the root password or the ability to SSH in using a default SSH key. Use the following command to access the server:
+### After the server is created, you will receive the root password or the ability to SSH in using a default SSH key. Use the following command to access the server:
 ```sh
 ssh root@<server-ip>
 ```
@@ -18,7 +18,7 @@ You need to generate two separate SSH key pairs for this project.
 
 ### Generate the first SSH key pair:
 
-Run this command on your local machine to generate the first key pair:
+### Run this command on your local machine to generate the first key pair:
 ```sh
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa_1
 ```
@@ -26,7 +26,7 @@ Follow the prompts to set a passphrase (optional) and finish the key creation.
 
 ### Generate the second SSH key pair:
 
-Similarly, create the second SSH key pair:
+### Similarly, create the second SSH key pair:
 ```sh
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa_2
 ```
@@ -42,19 +42,19 @@ Now, you'll add the public keys to the server's ~/.ssh/authorized_keys file to e
 
 Use the ssh-copy-id command to copy both public keys to the server.
 
-First, copy the first public key:
+### First, copy the first public key:
 ```sh
 ssh-copy-id -i ~/.ssh/id_rsa_1.pub root@<server-ip>
 ```
-Then, copy the second public key:
+### Then, copy the second public key:
 ```sh
 ssh-copy-id -i ~/.ssh/id_rsa_2.pub root@<server-ip>
 ```
 You will be prompted for the server password (if applicable) and the key will be added to the ~/.ssh/authorized_keys file on the server.
 
-Verify SSH login with both keys:
+### Verify SSH login with both keys:
 
-Test logging into the server using both keys with these commands:
+### Test logging into the server using both keys with these commands:
 ```sh
 ssh -i ~/.ssh/id_rsa_1 root@<server-ip>
 ```
@@ -70,13 +70,13 @@ To make it easier to SSH into your server without specifying the key path each t
 
 ### Edit the SSH config file:
 
-Open or create the SSH config file:
+### Open or create the SSH config file:
 ```sh
 nano ~/.ssh/config
 ```
-Add the server configuration:
+### Add the server configuration:
 
-Add the following configuration for your server:
+### Add the following configuration for your server:
 ```sh
 Host myserver
     HostName <server-ip>
@@ -110,18 +110,18 @@ Fail2Ban helps secure your server by preventing brute-force SSH login attempts. 
 
 ### Install Fail2Ban:
 
-Run the following command to install Fail2Ban on your server:
+### Run the following command to install Fail2Ban on your server:
 ```sh
 sudo apt update
 sudo apt install fail2ban
 ```
 ### Configure Fail2Ban for SSH:
 
-The default configuration for Fail2Ban includes protection for SSH. To check or modify the settings, you can edit the configuration file:
+### The default configuration for Fail2Ban includes protection for SSH. To check or modify the settings, you can edit the configuration file:
 ```sh
 sudo nano /etc/fail2ban/jail.local
 ```
-Make sure the following section is included and uncommented for SSH protection:
+### Make sure the following section is included and uncommented for SSH protection:
 ```sh
 [sshd]
 enabled = true
@@ -135,13 +135,13 @@ This will block an IP for 10 minutes (bantime = 600) after 3 failed login attemp
 
 ### Restart Fail2Ban:
 
-After editing the configuration, restart Fail2Ban to apply the changes:
+### After editing the configuration, restart Fail2Ban to apply the changes:
 ```sh
 sudo systemctl restart fail2ban
 ```
 ### Check Fail2Ban status:
 
-You can verify that Fail2Ban is protecting your SSH service by running:
+### You can verify that Fail2Ban is protecting your SSH service by running:
 ```sh
 sudo fail2ban-client status sshd
 ```

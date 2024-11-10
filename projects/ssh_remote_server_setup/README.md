@@ -2,11 +2,7 @@
 ## Step 1: Register and Set Up a Remote Linux Server
 
 Choose a Cloud Provider:
-You can select any provider like DigitalOcean, AWS, or others. For this example, we'll use DigitalOcean.
-Sign up for DigitalOcean and create a droplet (or a small server instance).
-Choose the Linux distribution (Ubuntu is common for beginners).
-Select the server size (a basic one, such as 1GB RAM, should suffice for testing).
-After setting up the server, you'll be provided with the server's IP address and SSH access credentials.
+You can select any provider like DigitalOcean, AWS, or others.
 
 ### Access the Server:
 

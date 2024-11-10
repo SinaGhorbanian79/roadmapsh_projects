@@ -8,7 +8,7 @@ Choose the Linux distribution (Ubuntu is common for beginners).
 Select the server size (a basic one, such as 1GB RAM, should suffice for testing).
 After setting up the server, you'll be provided with the server's IP address and SSH access credentials.
 
-- Access the Server:
+### Access the Server:
 
 After the server is created, you will receive the root password or the ability to SSH in using a default SSH key. Use the following command to access the server:
 ```sh
@@ -20,7 +20,7 @@ Replace <server-ip> with your actual server's IP address. This assumes you alrea
 
 You need to generate two separate SSH key pairs for this project.
 
-- Generate the first SSH key pair:
+### Generate the first SSH key pair:
 
 Run this command on your local machine to generate the first key pair:
 ```sh
@@ -28,13 +28,13 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa_1
 ```
 Follow the prompts to set a passphrase (optional) and finish the key creation.
 
-- Generate the second SSH key pair:
+### Generate the second SSH key pair:
 
 Similarly, create the second SSH key pair:
 ```sh
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa_2
 ```
-- Verify the key pairs:
+### Verify the key pairs:
 
 After generating the keys, you should see two private keys (id_rsa_1 and id_rsa_2) and their corresponding public keys (id_rsa_1.pub and id_rsa_2.pub) in the ~/.ssh/ directory.
 
@@ -42,7 +42,7 @@ After generating the keys, you should see two private keys (id_rsa_1 and id_rsa_
 
 Now, you'll add the public keys to the server's ~/.ssh/authorized_keys file to enable SSH login with both keys.
 
-- Copy the public key to the server:
+### Copy the public key to the server:
 
 Use the ssh-copy-id command to copy both public keys to the server.
 
@@ -72,7 +72,7 @@ If both commands work, you've successfully added the keys to the server.
 
 To make it easier to SSH into your server without specifying the key path each time, modify the ~/.ssh/config file on your local machine.
 
-- Edit the SSH config file:
+### Edit the SSH config file:
 
 Open or create the SSH config file:
 ```sh
@@ -96,7 +96,7 @@ Host myserver2
 ```
 Save and exit the editor (press Ctrl + X, then Y and Enter to confirm).
 
-- Test SSH connections using aliases:
+### Test SSH connections using aliases:
 
 Now, you can simply use the following command to SSH into your server:
 ```sh
@@ -112,14 +112,14 @@ This will automatically use the correct key based on the configuration.
 
 Fail2Ban helps secure your server by preventing brute-force SSH login attempts. Here's how you can install and configure it.
 
-- Install Fail2Ban:
+### Install Fail2Ban:
 
 Run the following command to install Fail2Ban on your server:
 ```sh
 sudo apt update
 sudo apt install fail2ban
 ```
-- Configure Fail2Ban for SSH:
+### Configure Fail2Ban for SSH:
 
 The default configuration for Fail2Ban includes protection for SSH. To check or modify the settings, you can edit the configuration file:
 ```sh
@@ -137,13 +137,13 @@ findtime = 600
 ```
 This will block an IP for 10 minutes (bantime = 600) after 3 failed login attempts within 10 minutes (maxretry = 3 and findtime = 600).
 
-- Restart Fail2Ban:
+### Restart Fail2Ban:
 
 After editing the configuration, restart Fail2Ban to apply the changes:
 ```sh
 sudo systemctl restart fail2ban
 ```
-- Check Fail2Ban status:
+### Check Fail2Ban status:
 
 You can verify that Fail2Ban is protecting your SSH service by running:
 ```sh
